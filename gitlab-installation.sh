@@ -62,7 +62,7 @@ GITLAB_CONFIG=/etc/gitlab/gitlab.rb
 if [ -f $GITLAB_CONFIG ];
 then
   echo "Configuring GitLab URL and Port"
-  sed -i "s/^external_url .*$/external_url \"http://${git_ip}:${git_port}\"/" $GITLAB_CONFIG
+  sed -i "s/^external_url .*$/external_url \"http://\$git_ip : \$git_port\"/" $GITLAB_CONFIG
 else
   echo "This '$GITLAB_CONFIG' is missing"
 fi
