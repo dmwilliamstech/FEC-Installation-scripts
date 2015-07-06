@@ -17,7 +17,7 @@
 tabs 4
 echo ''
 echo '#------------------------------------#'
-echo '#     Oracle GitLab Installation Script     #'
+echo '#  Oracle GitLab Installation Script #'
 echo '#------------------------------------#'
 clear
 
@@ -47,13 +47,12 @@ echo "Installing cronie"
 yum install cronie
 
 echo "Retrieving and installing GitLab rpm"
-RPM_FILE=gitlab-ce-7.10.4~omnibus.1.x86_64.rpm
-cd /home/$USER
-wget https://downloads-packages.s3.amazonaws.com/centos-7.1.1503/gitlab-ce-7.10.4~omnibus-1.x86_64.rpm --directory-prefix=/home/$USER
+RPM_FILE=gitlab-ce-7.10.4~omnibus-1.x86_64.rpm
+cd /home/$USER && wget https://downloads-packages.s3.amazonaws.com/centos-7.1.1503/gitlab-ce-7.10.4~omnibus-1.x86_64.rpm
 if [ -f /home/$USER/$RPM_FILE ];
 then
   echo "Installing GitLab rpm"
-  rpm -ivh /home/$USER/$RPM_FILE
+  cd /home/$USER && rpm -ivh $RPM_FILE
 else
   echo "This '$RPM_FILE' is missing"
 fi
