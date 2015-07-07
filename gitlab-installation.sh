@@ -59,13 +59,26 @@ fi
 
 echo "Configure Gitlab to run on desired IP and Port"
 GITLAB_CONFIG=/etc/gitlab/gitlab.rb
-EXTERNAL_URL=$git_ip\:$git_port
-if [ -f $GITLAB_CONFIG ];
-then
-  echo "Configuring GitLab URL and Port"
-  sed -i "s/localhost/$EXTERNAL_URL/g" $GITLAB_CONFIG
+if [ ! -z "$git_port" ];
+	then
+	EXTERNAL_URL=$git_ip\:$git_port
+	if [ -f $GITLAB_CONFIG ];
+	then
+	  echo "Configuring GitLab URL and Port"
+	  sed -i "s/localhost/$EXTERNAL_URL/g" $GITLAB_CONFIG
+	else
+	  echo "This '$GITLAB_CONFIG' is missing"
+	fi
 else
-  echo "This '$GITLAB_CONFIG' is missing"
+	echo "No port enter so default is 8080"
+	if [ -f $GITLAB_CONFIG ];
+		EXTERNAL_URL=$git_ip\:8080
+	then
+	  echo "Configuring GitLab URL and Port"
+	  sed -i "s/localhost/$EXTERNAL_URL/g" $GITLAB_CONFIG
+	else
+	  echo "This '$GITLAB_CONFIG' is missing"
+	fi
 fi
 
 echo "Restarting the gitlab-ctl"
