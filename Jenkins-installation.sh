@@ -34,7 +34,7 @@ yum -y install jenkins
 
 echo "Configure Jenkins to run on port 8081"
 JENKINS_CONFIG=/etc/init.d/jenkins
-sed -i "s/--httpPort\=$JENKINS_PORT/--httpPort\=8081/g" $JENKINS_CONFIG
+sed -i "s/--httpPort\=\$JENKINS_PORT/--httpPort\=8081/g" $JENKINS_CONFIG
 echo "Starting jenkins"
 service jenkins start
 echo "Configuring Jenkins to start on boot-up"
