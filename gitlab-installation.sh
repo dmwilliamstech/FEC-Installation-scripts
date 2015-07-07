@@ -63,7 +63,7 @@ EXTERNAL_URL=$git_ip\:$git_port
 if [ -f $GITLAB_CONFIG ];
 then
   echo "Configuring GitLab URL and Port"
-  sed -i "s/^external_url .*$/external_url \"http://${EXTERNAL_URL}\"/" $GITLAB_CONFIG
+  sed -i "s/localhost/$EXTERNAL_URL/g" $GITLAB_CONFIG
 else
   echo "This '$GITLAB_CONFIG' is missing"
 fi
