@@ -30,7 +30,11 @@ wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.r
 echo "Importing jenkins.repo file"
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 echo "Yum installing jenkins"
-yum install jenkins
+yum -y install jenkins
+
+echo "Configure Jenkins to run on port 8081"
+JENKINS_CONFIG=/etc/default/jenkins
+sed -i "s/--httpPort\=$JENKINS_PORT/--httpPort\=8081/g" $JENKINS_CONFIG
 echo "Starting jenkins"
 service jenkins start
 echo "Configuring Jenkins to start on boot-up"
