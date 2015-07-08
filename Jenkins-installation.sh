@@ -17,9 +17,9 @@
 
 tabs 4
 echo ''
-echo '#-----------------------------------------#'
-echo '#     Oracle Jenkins Installation Script  #'
-echo '#-----------------------------------------#'
+echo '#-------------------------------------------------------#'
+echo '#  Oracle Linux Jenkins and Docker Installation Script  #'
+echo '#-------------------------------------------------------#'
 clear
 
 echo "Updates packages."
@@ -39,3 +39,21 @@ echo "Starting jenkins"
 service jenkins start
 echo "Configuring Jenkins to start on boot-up"
 chkconfig jenkins on
+
+
+echo "Creating Docker baseurl"
+cat "[ol6_addons]
+name=Oracle Linux $releasever Add ons ($basearch)
+baseurl=http://public-yum.oracle.com/repo/OracleLinux/OL6/addons/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1" >> /etc/yum.repos.d/public-yum-ol7.repo
+
+echo "Installing Docker"
+yum install Docker
+
+echo "Starting Docker"
+service docker start
+
+echo "Configuring Docker to run on bootup"
+chkconfig docker on
