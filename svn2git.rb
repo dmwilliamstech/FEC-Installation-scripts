@@ -9,6 +9,13 @@
   puts "Cloning repo #{name}"
 	  if File.exist?('users.txt')
 	  system "git svn clone $i --authors-file=users.txt --no-metadata -s ."
+	  system "cp -Rf .git/refs/remotes/origin/tags/* .git/refs/tags/"
+	  system "rm -Rf .git/refs/remotes/origin/tags"
+	  syste, "cp -Rf .git/refs/remotes/* .git/refs/heads/"
+	  system "rm -Rf .git/refs/remotes"
+	  system "git remote add master git@localhost:gitlab-users/#{name}.git"
+	  system "git push --set-upstream gitlab master"
+
 	else
 		puts "No users.txt present"
 	end
