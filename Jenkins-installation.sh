@@ -50,7 +50,7 @@ gpgcheck=1
 enabled=1" >> /etc/yum.repos.d/public-yum-ol7.repo
 
 echo "Installing Docker"
-yum install Docker
+yum install docker
 
 echo "Starting Docker"
 service docker start
