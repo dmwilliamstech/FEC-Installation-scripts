@@ -8,7 +8,7 @@
 	if File.exist?('users.txt')
 	  puts "#{name}: #{location}"
 	  puts "Cloning repo #{name}"
-	  system "git svn clone $i --authors-file=users.txt --no-metadata -s ."
+	  system "git svn clone ${location} --authors-file=users.txt --no-metadata -s ."
 	  system "cp -Rf .git/refs/remotes/origin/tags/* .git/refs/tags/"
 	  system "rm -Rf .git/refs/remotes/origin/tags"
 	  syste, "cp -Rf .git/refs/remotes/* .git/refs/heads/"
